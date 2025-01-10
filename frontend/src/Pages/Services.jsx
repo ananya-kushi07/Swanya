@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import './Services.css'; // Ensure you have the correct CSS file linked
+import { useNavigate } from 'react-router-dom';
+import { Box, Typography, Button, Input, Select, MenuItem, Checkbox, FormControlLabel } from '@mui/material';
 import api from '../utils/api'; // Axios instance for API calls
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for routing
 
 const Services = () => {
   const [services, setServices] = useState([]);
@@ -10,7 +10,7 @@ const Services = () => {
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
   const [availability, setAvailability] = useState(true);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchServices();
@@ -31,96 +31,101 @@ const Services = () => {
     }
   };
 
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
-  const handleCategoryChange = (e) => {
-    setCategory(e.target.value);
-  };
-
-  const handlePriceChange = (e) => {
-    const { name, value } = e.target;
-    if (name === 'minPrice') setMinPrice(value);
-    if (name === 'maxPrice') setMaxPrice(value);
-  };
-
-  const handleAvailabilityChange = (e) => {
-    setAvailability(e.target.checked);
-  };
-
   const handleCardClick = (id) => {
-    navigate(`/book/${id}`); // Navigate to the booking page with the service ID
+    navigate(`/services/${id}`);
   };
-
-  const filteredServices = services.filter((service) =>
-    service.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
   return (
-    <div className="services-container">
-      <nav>
-        <div className="search-filter">
-          <input
-            type="text"
-            placeholder="Search services..."
-            value={searchTerm}
-            onChange={handleSearchChange}
-          />
-          <select value={category} onChange={handleCategoryChange}>
-            <option value="">All Categories</option>
-            <option value="Plumbing">Plumbing</option>
-            <option value="Electrical">Electrical</option>
-            <option value="Carpentry">Carpentry</option>
-            <option value="Cleaning">Cleaning</option>
-            <option value="Mechanical">Mechanical</option>
-            <option value="Pest Control">Pest Control</option>
-          </select>
-          <input
-            type="number"
-            name="minPrice"
-            placeholder="Min Price"
-            value={minPrice}
-            onChange={handlePriceChange}
-          />
-          <input
-            type="number"
-            name="maxPrice"
-            placeholder="Max Price"
-            value={maxPrice}
-            onChange={handlePriceChange}
-          />
-          <label>
-            Available Only
-            <input
-              type="checkbox"
-              checked={availability}
-              onChange={handleAvailabilityChange}
-            />
-          </label>
-          <button className="search-btn" onClick={fetchServices}>
-            Search
-          </button>
-        </div>
-      </nav>
+    <Box className="services-container" sx={{ maxWidth: '1200px', margin: '0 auto', padding: 2 }}>
+      <Typography variant="h4" align="center" sx={{ marginBottom: 2 }}>Our Services</Typography>
 
-      <h1>Our Services</h1>
-      <ul className="services-list">
-        {filteredServices.map((service) => (
-          <li
-            key={service.id}
-            className="service-card"
-            onClick={() => handleCardClick(service.id)}
+      {/* Search and Filter Section */}
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, marginBottom: 3 }}>
+        <Input
+          placeholder="Search services..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          sx={{ flex: 1 }}
+        />
+        <Select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          displayEmpty
+          sx={{ flex: 1 }}
+        >
+          <MenuItem value="">All Categories</MenuItem>
+          <MenuItem value="Plumbing">Plumbing</MenuItem>
+          <MenuItem value="Electrical">Electrical</MenuItem>
+          <MenuItem value="Carpentry">Carpentry</MenuItem>
+          <MenuItem value="Cleaning">Cleaning</MenuItem>
+          <MenuItem value="Mechanical">Mechanical</MenuItem>
+          <MenuItem value="Pest Control">Pest Control</MenuItem>
+        </Select>
+
+        <Input
+          type="number"
+          placeholder="Min Price"
+          value={minPrice}
+          onChange={(e) => setMinPrice(e.target.value)}
+          sx={{ width: '100px' }}
+        />
+        <Input
+          type="number"
+          placeholder="Max Price"
+          value={maxPrice}
+          onChange={(e) => setMaxPrice(e.target.value)}
+          sx={{ width: '100px' }}
+        />
+        <FormControlLabel
+          control={<Checkbox checked={availability} onChange={(e) => setAvailability(e.target.checked)} />}
+          label="Available Only"
+        />
+        <Button variant="contained" onClick={fetchServices}>Search</Button>
+      </Box>
+
+      {/* Services List */}
+      <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 2 }}>
+        {services.map((service) => (
+          <Box
+            key={service._id}
+            sx={{
+              backgroundColor: '#fff',
+              borderRadius: 2,
+              boxShadow: 1,
+              padding: 2,
+              '&:hover': { boxShadow: 3 },
+              position: 'relative',
+            }}
+            onClick={() => handleCardClick(service._id)}
           >
-            <h2>{service.name}</h2>
-            <p>Category: {service.category}</p>
-            <p>Description: {service.description}</p>
-            <p>Price: ${service.price}</p>
-            <p>Availability: {service.availability ? 'Available' : 'Not Available'}</p>
-          </li>
+            <Typography variant="h6" sx={{ marginBottom: 1 }}>{service.name}</Typography>
+            <Typography variant="body2" sx={{ marginBottom: 1, color: 'text.secondary' }}>{service.category}</Typography>
+            <Typography variant="body2" sx={{ marginBottom: 1, color: 'text.secondary' }}>{service.description}</Typography>
+            <Typography variant="h6" sx={{ marginBottom: 1, color: 'green' }}>₹{service.price}</Typography>
+            <Typography variant="body2" sx={{ color: service.availability ? 'green' : 'red' }}>
+              {service.availability ? 'Available' : 'Not Available'}
+            </Typography>
+
+            {/* Book Now Button */}
+            {/* <Button
+              variant="contained"
+              color="success"
+              sx={{
+                position: 'absolute',
+                bottom: 10,
+                right: 10,
+                borderRadius: 5,
+                fontSize: '0.9rem',
+                '&:hover': { backgroundColor: '#27ae60' },
+              }}
+              onClick={() => navigate(`/book/${service._id}`)}
+            >
+              Book Now
+            </Button> */}
+          </Box>
         ))}
-      </ul>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

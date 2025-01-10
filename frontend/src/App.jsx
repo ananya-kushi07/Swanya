@@ -1,7 +1,7 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
+import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './Components/Navbar';
@@ -15,11 +15,12 @@ import Bookings from './Pages/Booking'; // Import the bookings page component
 import ReviewPage from './Pages/Review'; // Import the ReviewPage component
 import SignUp from './Components/SignUp'; // Import SignUp component
 import SignIn from './Components/SignIn'; // Import SignIn component
+import ServiceDetails from './Pages/ServiceDetails'; // Import the ServiceDetails component
 import Chatbot from './Pages/chatbot'; // Import Chatbot component
 import Chatting from './Pages/Chatting';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <Router>
@@ -32,6 +33,9 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/contact-info" element={<ContactInfo />} />
+          
+          {/* Service Details Route */}
+          <Route path="/services/:id" element={<ServiceDetails />} /> {/* Added Route for ServiceDetails */}
           
           {/* Booking Routes */}
           <Route path="/book/:id" element={<BookingPage />} />
@@ -55,7 +59,7 @@ function App() {
         </Routes>
       </div>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;

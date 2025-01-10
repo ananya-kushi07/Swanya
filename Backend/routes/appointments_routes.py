@@ -116,7 +116,7 @@ from models.appointment_models import AppointmentCreate, AppointmentResponse
 router = APIRouter()
 
 # Create an appointment
-@router.post("/", response_model=AppointmentResponse)
+@router.patch("/booking", response_model=AppointmentResponse)
 async def create_appointment(appointment: AppointmentCreate):
     appointment_data = {
         "service_id": appointment.service_id,
