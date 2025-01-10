@@ -110,7 +110,7 @@ const SignIn = () => {
       if (role === 'admin') {
         navigate('/admin-dashboard');
       } else if (role === 'customer') {
-        navigate('/');
+        navigate('/home');
       } else if (role === 'service_provider') {
         navigate('/service-provider-dashboard');
       } else {
