@@ -1,25 +1,38 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import './BookingPage.css';
 
 const BookingPage = () => {
   const [bookingDate, setBookingDate] = useState('');
-  const [isBooked, setIsBooked] = useState(false);
+  const [notes, setNotes] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
+  const { serviceId, serviceProviderId } = location.state || {}; // Get state passed from service details
 
   const handleBookingDateChange = (e) => {
-    setBookingDate(e.target.value); // Update the booking date
+    setBookingDate(e.target.value);
+  };
+
+  const handleNotesChange = (e) => {
+    setNotes(e.target.value);
   };
 
   const handleBookNow = () => {
-    if (bookingDate) {
-      // Store booking in localStorage
-      localStorage.setItem('bookingDate', bookingDate);
+    if (bookingDate && notes) {
+      const bookingData = {
+        serviceId,
+        serviceProviderId,
+        bookingDate,
+        notes,
+      };
 
-      setIsBooked(true); // Mark as booked
+      // Store booking data in localStorage (or send it to the backend)
+      localStorage.setItem('booking', JSON.stringify(bookingData));
+
       alert('Booking Successful!');
       navigate('/bookings'); // Redirect to the bookings page
     } else {
-      alert('Please select a booking date first.');
+      alert('Please fill in all fields before booking.');
     }
   };
 
@@ -27,9 +40,8 @@ const BookingPage = () => {
     <div className="booking-container">
       <h1>Book Service</h1>
 
-      {/* Calendar input for booking date */}
-      <div className="booking-date">
-        <label htmlFor="bookingDate">Select Booking Date: </label>
+      <div className="form-group">
+        <label htmlFor="bookingDate">Select Appointment Date:</label>
         <input
           type="date"
           id="bookingDate"
@@ -38,9 +50,18 @@ const BookingPage = () => {
         />
       </div>
 
-      {/* Final Book button */}
+      <div className="form-group">
+        <label htmlFor="notes">Notes:</label>
+        <textarea
+          id="notes"
+          value={notes}
+          onChange={handleNotesChange}
+          placeholder="Mention any requirements or issues..."
+        />
+      </div>
+
       <button className="book-now-btn" onClick={handleBookNow}>
-        Final Book
+        Confirm Booking
       </button>
     </div>
   );
