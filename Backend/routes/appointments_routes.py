@@ -78,3 +78,16 @@ async def update_status(service_provider_id: str, appointment_id: str, status: s
 def notify_cust(service_provider_id: str, status: str):
     # Placeholder logic for notifications
     print(f"Notify customer: Service provider {service_provider_id} has updated the appointment status to {status}.")
+
+
+
+# Route to fetch all appointments received by the service provider using the provider_id
+@router.get("/provider/{provider_id}/appointments", response_model=List[AppointmentResponse])
+async def get_appointments_by_provider(provider_id: str, db=Depends(get_database)) -> List[AppointmentResponse]:
+    """
+    Endpoint to fetch all appointments received by the service provider using the provider_id.
+    """
+    appointments = await db["appointments"].find({"provider_id": provider_id}).to_list(100)
+    for appointment in appointments:
+        appointment["_id"] = str(appointment["_id"])
+    return [AppointmentResponse(**appointment) for appointment in appointments]

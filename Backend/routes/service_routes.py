@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException, Depends
 from models.service_models import ServiceCreate, ServiceSearch, ServiceResponse
+from models.user_models import UserProfile
 from motor.motor_asyncio import AsyncIOMotorClient
 from typing import List
 from database import get_database, db
@@ -14,19 +15,20 @@ services_collection = db["services"]
 
 # Route for service providers to create a service
 @router.post("/create", response_model=ServiceResponse)
-async def create_service(service: ServiceCreate, db = Depends(get_database)) -> ServiceResponse:
+async def create_service(service: ServiceCreate, db=Depends(get_database)) -> ServiceResponse:
     """
     Endpoint for service providers to create a service.
     """
     services_collection = db["services"]
     service_data = service.dict()
-    
-    # Generate a random provider_id
-    service_data["provider_id"] = str(ObjectId())   # instead try to give the service_provider_id
-    
+
+    # Use the provider_id from the service input
+    service_data["provider_id"] = service.provider_id  # Assume provider_id is a field in ServiceCreate
+
     result = await services_collection.insert_one(service_data)
     service_data["_id"] = str(result.inserted_id)
     return ServiceResponse(**service_data)
+
 
 
 
@@ -64,3 +66,18 @@ async def search_services(filters: ServiceSearch, db = Depends(get_database)) ->
     for service in services:
         service["_id"] = str(service["_id"])
     return [ServiceResponse(**service) for service in services]
+
+
+# Route to fetch the details of the service_provider using the service_provider_id
+
+@router.get("/provider/{provider_id}", response_model=UserProfile)
+async def get_service_provider(provider_id: str, db=Depends(get_database)) -> UserProfile:
+    """
+    Endpoint to fetch the details of the service provider using the provider_id.
+    """
+    users_collection = db["users"]
+    service_provider = await users_collection.find_one({"_id": ObjectId(provider_id)})
+    if not service_provider:
+        raise HTTPException(status_code=404, detail="Service provider not found")
+    service_provider["_id"] = str(service_provider["_id"])
+    return UserProfile(**service_provider)
