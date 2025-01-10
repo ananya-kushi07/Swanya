@@ -49,7 +49,7 @@ const Services = () => {
     setAvailability(e.target.checked);
   };
 
-  const handleBookNowClick = (id) => {
+  const handleCardClick = (id) => {
     navigate(`/book/${id}`); // Navigate to the booking page with the service ID
   };
 
@@ -59,26 +59,7 @@ const Services = () => {
 
   return (
     <div className="services-container">
-      {/* Navigation Bar */}
       <nav>
-        <li>
-          <a href="#">Services</a>
-          <ul className="dropdown">
-            <li>
-              <a href="#">Home Maintenance Services</a>
-              <ul className="sub-dropdown">
-                <li>Plumbing: Leak repair, pipe installations, drain cleaning, water heater repair.</li>
-                <li>Electricians: Electrical wiring, socket installations, lighting setups, fault repairs.</li>
-                <li>Carpentry: Furniture making, door and window installations, repairs, woodwork.</li>
-                <li>Home Appliances Repair: Refrigerator, washing machine, microwave, air conditioner repair.</li>
-                <li>AC Technicians: Installation, maintenance, repair, cleaning.</li>
-              </ul>
-            </li>
-            {/* Other categories */}
-          </ul>
-        </li>
-
-        {/* Search and Filter Section */}
         <div className="search-filter">
           <input
             type="text"
@@ -123,28 +104,22 @@ const Services = () => {
         </div>
       </nav>
 
-      {/* Services Section */}
       <h1>Our Services</h1>
       <ul className="services-list">
         {filteredServices.map((service) => (
-          <li key={service.id}>
+          <li
+            key={service.id}
+            className="service-card"
+            onClick={() => handleCardClick(service.id)}
+          >
             <h2>{service.name}</h2>
             <p>Category: {service.category}</p>
             <p>Description: {service.description}</p>
             <p>Price: ${service.price}</p>
             <p>Availability: {service.availability ? 'Available' : 'Not Available'}</p>
-            {/* Book Now Button */}
-            <button className="book-now-btn" onClick={() => handleBookNowClick(service.id)}>
-              Book Now
-            </button>
           </li>
         ))}
       </ul>
-
-      <p>
-        Offering efficient, reliable, and accessible maintenance services. From electrical work to plumbing, AC repair to pest control, our expert professionals are just a click away for all your home and business needs.
-      </p>
-      <img src="https://img3.goodfon.com/wallpaper/nbig/a/14/tables-wood-plumbing-wrench.jpg" alt="Services" />
     </div>
   );
 };
