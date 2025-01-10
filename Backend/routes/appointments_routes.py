@@ -215,3 +215,17 @@ async def get_appointments_by_provider(provider_id: str, db=Depends(get_database
 #     for notification in notifications:
 #         notification["_id"] = str(notification["_id"])
 #     return notifications
+
+
+
+
+# Route to fetch all appointments made by a user using the user_id
+@router.get("/user/{user_id}/appointments", response_model=List[AppointmentResponse])
+async def get_appointments_by_user(user_id: str, db=Depends(get_database)) -> List[AppointmentResponse]:
+    """
+    Endpoint to fetch all appointments made by a user using the user_id.
+    """
+    appointments = await db["appointments"].find({"customer_id": user_id}).to_list(100)
+    for appointment in appointments:
+        appointment["_id"] = str(appointment["_id"])
+    return [AppointmentResponse(**appointment) for appointment in appointments]
