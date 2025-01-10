@@ -1,13 +1,232 @@
+// import React, { useState, useEffect } from 'react';
+// import { useParams, useNavigate } from 'react-router-dom';
+// import { Card, CardContent, CardActions, Button, Typography } from '@mui/material';
+// import { makeStyles } from '@mui/styles';
+// import api from '../utils/api';
+
+// const useStyles = makeStyles((theme) => ({
+//   cardContainer: {
+//     display: 'flex',
+//     flexDirection: 'column',
+//     alignItems: 'center',
+//     gap: '20px',
+//     margin: '20px',
+//   },
+//   card: {
+//     width: '100%',
+//     maxWidth: '500px',
+//     borderRadius: '15px',
+//     boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+//     transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+//     '&:hover': {
+//       transform: 'translateY(-10px)',
+//       boxShadow: '0 10px 20px rgba(0, 0, 0, 0.15)',
+//     },
+//     backgroundColor: '#fff', // White background color from Services component
+//   },
+//   cardContent: {
+//     textAlign: 'center',
+//     padding: '20px',
+//   },
+//   title: {
+//     fontSize: '1.8rem',
+//     fontWeight: '600',
+//     color: '#34495e',
+//     marginBottom: '10px',
+//   },
+//   description: {
+//     fontSize: '1rem',
+//     color: '#7f8c8d',
+//     marginBottom: '15px',
+//   },
+//   price: {
+//     fontWeight: 'bold',
+//     fontSize: '1.2rem',
+//     color: '#2ecc71', // Green color for price as in Services component
+//     marginBottom: '15px',
+//   },
+//   button: {
+//     backgroundColor: '#27ae60', // Green color for button (from Services component)
+//     color: '#fff',
+//     borderRadius: '5px',
+//     fontSize: '0.9rem',
+//     '&:hover': {
+//       backgroundColor: '#2ecc71', // Darker shade for hover effect (from Services component)
+//     },
+//     // position: 'absolute',
+//     bottom: 10,
+//     right: 10,
+//   },
+//   availability: {
+//     fontSize: '1rem',
+//     color: '#e74c3c', // Red color for availability
+//     fontWeight: 'bold',
+//   },
+// }));
+
+// const ServiceDetails = () => {
+//   const { id } = useParams();
+//   const [service, setService] = useState(null);
+//   const [serviceProvider, setServiceProvider] = useState(null);
+//   const navigate = useNavigate();
+//   const classes = useStyles();
+
+//   useEffect(() => {
+//     fetchServiceDetails();
+//   }, [id]);
+
+//   const fetchServiceDetails = async () => {
+//     try {
+//       const serviceResponse = await api.get(`/services/service/${id}`);
+//       setService(serviceResponse.data);
+
+//       // Fetch service provider details using provider_id from service
+//       const providerResponse = await api.get(`/services/provider/${serviceResponse.data.provider_id}`);
+//       setServiceProvider(providerResponse.data);
+//     } catch (err) {
+//       console.error('Error fetching service or provider details:', err);
+//     }
+//   };
+
+//   const handleBookNow = () => {
+//     navigate(`/book/${id}`, {
+//       state: {
+//         serviceId: id,
+//         serviceProviderId: service?.provider_id,
+//       },
+//     });
+//   };
+
+//   if (!service || !serviceProvider) return <p>Loading...</p>;
+
+//   return (
+//     <div className={classes.cardContainer}>
+//       <Card className={classes.card}>
+//         <CardContent className={classes.cardContent}>
+//           <Typography variant="h5" className={classes.title}>
+//             {service.name}
+//           </Typography>
+//           <Typography className={classes.description}>{service.category}</Typography>
+//           <Typography className={classes.description}>{service.description}</Typography>
+//           <Typography className={classes.price}>Price: ₹{service.price}</Typography>
+//           <Typography className={classes.availability}>
+//             Availability: {service.availability ? 'Available' : 'Not Available'}
+//           </Typography>
+//         </CardContent>
+//         <CardActions>
+//           {/* Add any actions here if needed */}
+//         </CardActions>
+//       </Card>
+
+//       <Card className={classes.card}>
+//         <CardContent className={classes.cardContent}>
+//           <Typography variant="h6">Service Provider Details</Typography>
+//           <Typography className={classes.description}>
+//             Name: {serviceProvider.full_name}
+//           </Typography>
+//           <Typography className={classes.description}>
+//             Email: {serviceProvider.email}
+//           </Typography>
+//           <Typography className={classes.description}>
+//             Location: {serviceProvider.location}
+//           </Typography>
+//         </CardContent>
+//       </Card>
+//         <Button
+//                     variant="contained"
+//                     color="success"
+//                     sx={{
+//                       position: 'center',
+//                       bottom: 10,
+//                       right: 10,
+//                       borderRadius: 5,
+//                       fontSize: '0.9rem',
+//                       '&:hover': { backgroundColor: '#27ae60' },
+//                     }}
+//                     onClick={() => navigate(`/book/${service._id}`)}
+//                   >
+//                     Book Now
+//                   </Button>
+//     </div>
+//   );
+// };
+
+// export default ServiceDetails;
+
+
+
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import api from '../utils/api'; // Axios instance for API calls
-import './ServiceDetails.css'; // Add styling as needed
+import { Card, CardContent, CardActions, Button, Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import api from '../utils/api';
+
+const useStyles = makeStyles((theme) => ({
+  cardContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: '20px',
+    margin: '20px',
+  },
+  card: {
+    width: '100%',
+    maxWidth: '500px',
+    borderRadius: '15px',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+    '&:hover': {
+      transform: 'translateY(-10px)',
+      boxShadow: '0 10px 20px rgba(0, 0, 0, 0.15)',
+    },
+    backgroundColor: '#fff', // White background color from Services component
+  },
+  cardContent: {
+    textAlign: 'center',
+    padding: '20px',
+  },
+  title: {
+    fontSize: '1.8rem',
+    fontWeight: '600',
+    color: '#34495e',
+    marginBottom: '10px',
+  },
+  description: {
+    fontSize: '1rem',
+    color: '#7f8c8d',
+    marginBottom: '15px',
+  },
+  price: {
+    fontWeight: 'bold',
+    fontSize: '1.2rem',
+    color: '#2ecc71', // Green color for price as in Services component
+    marginBottom: '15px',
+  },
+  button: {
+    backgroundColor: '#27ae60', // Green color for button (from Services component)
+    color: '#fff',
+    borderRadius: '5px',
+    fontSize: '0.9rem',
+    '&:hover': {
+      backgroundColor: '#2ecc71', // Darker shade for hover effect (from Services component)
+    },
+    // position: 'absolute',
+    bottom: 10,
+    right: 10,
+  },
+  availability: {
+    fontSize: '1rem',
+    color: '#e74c3c', // Red color for availability
+    fontWeight: 'bold',
+  },
+}));
 
 const ServiceDetails = () => {
-  const { id } = useParams(); // Get service ID from the URL
+  const { id } = useParams();
   const [service, setService] = useState(null);
   const [serviceProvider, setServiceProvider] = useState(null);
   const navigate = useNavigate();
+  const classes = useStyles();
 
   useEffect(() => {
     fetchServiceDetails();
@@ -15,7 +234,7 @@ const ServiceDetails = () => {
 
   const fetchServiceDetails = async () => {
     try {
-      const serviceResponse = await api.get(`/services/${id}`);
+      const serviceResponse = await api.get(`/services/service/${id}`);
       setService(serviceResponse.data);
 
       // Fetch service provider details using provider_id from service
@@ -38,26 +257,53 @@ const ServiceDetails = () => {
   if (!service || !serviceProvider) return <p>Loading...</p>;
 
   return (
-    <div className="service-details-container">
-      <section className="service-section">
-        <h2>{service.name}</h2>
-        <p>{service.category}</p>
-        <p>{service.description}</p>
-        <p>Price: ${service.price}</p>
-        <p>Availability: {service.availability ? 'Available' : 'Not Available'}</p>
-      </section>
+    <div className={classes.cardContainer}>
+      <Card className={classes.card}>
+        <CardContent className={classes.cardContent}>
+          <Typography variant="h5" className={classes.title}>
+            {service.name}
+          </Typography>
+          <Typography className={classes.description}>{service.category}</Typography>
+          <Typography className={classes.description}>{service.description}</Typography>
+          <Typography className={classes.price}>Price: ₹{service.price}</Typography>
+          <Typography className={classes.availability}>
+            Availability: {service.availability ? 'Available' : 'Not Available'}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          {/* Add any actions here if needed */}
+        </CardActions>
+      </Card>
 
-      <section className="provider-section">
-        <h3>Service Provider Details</h3>
-        <p>Name: {serviceProvider.full_name}</p>
-        <p>Email: {serviceProvider.email}</p>
-        <p>Location: {serviceProvider.location}</p>
-        <p>Preferences: {JSON.stringify(serviceProvider.preferences)}</p>
-      </section>
-
-      <button className="book-now-btn" onClick={handleBookNow}>
+      <Card className={classes.card}>
+        <CardContent className={classes.cardContent}>
+          <Typography variant="h6">Service Provider Details</Typography>
+          <Typography className={classes.description}>
+            Name: {serviceProvider.full_name}
+          </Typography>
+          <Typography className={classes.description}>
+            Email: {serviceProvider.email}
+          </Typography>
+          <Typography className={classes.description}>
+            Location: {serviceProvider.location}
+          </Typography>
+        </CardContent>
+      </Card>
+      <Button
+        variant="contained"
+        color="success"
+        sx={{
+          position: 'center',
+          bottom: 10,
+          right: 10,
+          borderRadius: 5,
+          fontSize: '0.9rem',
+          '&:hover': { backgroundColor: '#27ae60' },
+        }}
+        onClick={handleBookNow}
+      >
         Book Now
-      </button>
+      </Button>
     </div>
   );
 };

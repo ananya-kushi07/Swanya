@@ -4,7 +4,9 @@ import { FaFacebook, FaLinkedin, FaInstagram, FaWhatsapp } from "react-icons/fa"
 
 function Home() {
   return (
+    
     <div className="home-container">
+      
       {/* Hero Section */}
       <div className="hero">
         <h1>

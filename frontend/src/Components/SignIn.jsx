@@ -100,11 +100,14 @@ const SignIn = () => {
     try {
       const response = await loginUser(credentials);
       alert('Login successful!');
+      
       console.log(response);
+      
 
       // Store user details in local storage
       localStorage.setItem('user', JSON.stringify(response));
 
+     
       // Redirect based on user role
       const role = response.role;
       if (role === 'admin') {
