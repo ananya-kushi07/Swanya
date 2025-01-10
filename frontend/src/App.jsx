@@ -25,7 +25,7 @@ function App() {
       <div className="content">
         <Routes>
           {/* Public Routes */}
-          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/services" element={<Services />} />
           <Route path="/profile" element={<Profile />} />
@@ -39,7 +39,7 @@ function App() {
           <Route path="/review" element={<ReviewPage />} />
 
           {/* Authentication Routes */}
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
           
           {/* Default Route (fallback) */}
