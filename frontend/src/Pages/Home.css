@@ -1,0 +1,124 @@
+/* General Styling */
+.home-container {
+    background-image: url('../assets/images/home-image.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 50px 20px;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* Hero Section */
+.hero h1 {
+    font-size: 3em;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2em;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: justify;
+}
+
+/* Stats Section */
+.stat-cards {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    gap: 20px;
+}
+
+.stat-card {
+    flex: 1;
+    min-width: 250px;
+    padding: 20px;
+    background-color: #A7D477;
+    color: #4A6670;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.stat-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.stat-value {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Info Section */
+.info-section {
+    margin-top: 50px;
+    color: #4A6670;
+}
+
+.info-section h2 {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: white;
+    background-color: #4A6670;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.info-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.info-card {
+    width: 250px;
+    padding: 20px;
+    background-color: #A7D477;
+    color: #4A6670;
+    border-radius: 10px;
+    text-align: justify;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.info-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.info-card h3 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Footer */
+footer {
+    margin-top: 50px;
+    background-color: #4A6670;
+    padding: 20px;
+    color: white;
+    text-align: center;
+}
+
+footer .social-icons a {
+    margin: 0 10px;
+    color: white;
+    font-size: 1.5em;
+    transition: color 0.3s;
+}
+
+footer .social-icons a:hover {
+    color: #A7D477;
+}
