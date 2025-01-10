@@ -58,8 +58,8 @@ const Profile = () => {
         <p><strong>Full Name:</strong> {profileData.full_name}</p>
         <p><strong>Role:</strong> {profileData.role}</p>
         <p><strong>Location:</strong> {profileData.location}</p>
-        <p><strong>Preferences:</strong> {JSON.stringify(profileData.preferences)}</p>
-        <p><strong>User ID:</strong> {profileData.user_id}</p>
+        {/* <p><strong>Preferences:</strong> {JSON.stringify(profileData.preferences)}</p> */}
+        {/* <p><strong>User ID:</strong> {profileData.user_id}</p> */}
       </div>
 
       <div style={styles.updateSection}>
@@ -82,7 +82,7 @@ const Profile = () => {
           style={styles.input}
         />
 
-        <label style={styles.label}>Preferences:</label>
+        {/* <label style={styles.label}>Preferences:</label>
         <textarea
           name="preferences"
           value={JSON.stringify(editData.preferences)}
@@ -94,7 +94,7 @@ const Profile = () => {
             }
           }}
           style={styles.textarea}
-        />
+        /> */}
 
         <button onClick={handleUpdate} style={styles.button}>Update Profile</button>
       </div>

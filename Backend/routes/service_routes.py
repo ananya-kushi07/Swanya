@@ -81,3 +81,38 @@ async def get_service_provider(provider_id: str, db=Depends(get_database)) -> Us
         raise HTTPException(status_code=404, detail="Service provider not found")
     service_provider["_id"] = str(service_provider["_id"])
     return UserProfile(**service_provider)
+
+
+# Route to fetch the details of a service by service ID
+# @router.get("/service/{service_id}", response_model=ServiceResponse)
+# async def get_service_by_id(service_id: str, db=Depends(get_database)) -> ServiceResponse:
+#     """
+#     Endpoint to fetch the details of a service by service ID.
+#     """
+#     service = await services_collection.find_one({"_id": ObjectId(service_id)})
+#     if not service:
+#         raise HTTPException(status_code=404, detail="Service not found")
+#     service["_id"] = str(service["_id"])
+#     return ServiceResponse(**service)
+
+
+
+services_collection = db["services"]
+
+
+@router.get("/service/{service_id}", response_model=ServiceResponse)
+async def get_service_by_id(service_id: str, db=Depends(get_database)) -> ServiceResponse:
+    """
+    Endpoint to fetch the details of a service by service ID.
+    """
+    services_collection = db["services"]
+    if not ObjectId.is_valid(service_id):
+        raise HTTPException(status_code=400, detail="Invalid service ID")
+    try:
+        service = await services_collection.find_one({"_id": ObjectId(service_id)})
+        if not service:
+            raise HTTPException(status_code=404, detail="Service not found")
+        service["_id"] = str(service["_id"])  # Convert ObjectId to string
+        return ServiceResponse(**service)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
