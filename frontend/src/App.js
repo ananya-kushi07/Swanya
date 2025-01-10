@@ -11,6 +11,7 @@ import Bookings from './Pages/Booking'; // Import the bookings page component
 import ReviewPage from './Pages/Review'; // Import the ReviewPage component
 import SignUp from './Components/SignUp'; // Import SignUp component
 import SignIn from './Components/SignIn'; // Import SignIn component
+import Chatbot from './Pages/chatbot'; // Import Chatbot component
 
 const App = () => {
   return (
@@ -20,7 +21,7 @@ const App = () => {
         <Routes>
           {/* Public Routes */}
           
-          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/services" element={<Services />} />
           <Route path="/profile" element={<Profile />} />
@@ -34,11 +35,16 @@ const App = () => {
           <Route path="/review" element={<ReviewPage />} />
 
           {/* Authentication Routes */}
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
           
           {/* Default Route (fallback) */}
-          <Route path="*" element={<SignIn />} />
+          {/* <Route path="*" element={<SignIn />} /> */}
+
+          {/* chatbot */}
+          <Route path="/chat" element={<Chatbot />} />
+
+
         </Routes>
       </div>
     </Router>
