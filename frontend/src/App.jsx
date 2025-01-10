@@ -16,6 +16,7 @@ import ReviewPage from './Pages/Review'; // Import the ReviewPage component
 import SignUp from './Components/SignUp'; // Import SignUp component
 import SignIn from './Components/SignIn'; // Import SignIn component
 import Chatbot from './Pages/chatbot'; // Import Chatbot component
+import Chatting from './Pages/Chatting';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -48,6 +49,8 @@ function App() {
 
           {/* chatbot */}
           <Route path="/chat" element={<Chatbot />} />
+
+          <Route path="/chatting" element={<Chatting />} />
 
         </Routes>
       </div>

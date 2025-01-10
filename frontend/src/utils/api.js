@@ -22,7 +22,7 @@ export const registerUser = async (data) => {
 // Login User API call
 export const loginUser = async (data) => {
   try {
-    const response = await API.post('/users/auth/login', data);
+    const response = await API.post('/users/auth/login/', data);
     return response.data;
   } catch (error) {
     console.error('Login Error:', error.response?.data);
