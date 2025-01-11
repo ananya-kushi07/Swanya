@@ -30,48 +30,26 @@ from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, FileResponse
 from fastapi import FastAPI, WebSocket, Request, WebSocketDisconnect
 from starlette.middleware.cors import CORSMiddleware
-from routes import user_routes, service_routes, appointments_routes
+from routes import user_routes, service_routes, appointments_routes, map_routes
+import json
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
+clients = []  # Store connected clients
 
-class ConnectionManager:
-    def __init__(self):
-        self.active_connections: List[WebSocket] = []
-
-    async def connect(self, websocket: WebSocket):
-        await websocket.accept()
-        self.active_connections.append(websocket)
-
-    def disconnect(self, websocket: WebSocket):
-        self.active_connections.remove(websocket)
-
-    async def send_personal_message(self, message: str, websocket: WebSocket):
-        await websocket.send_text(message)
-        
-    async def broadcast(self, message: str, websocket: WebSocket):
-        for connection in self.active_connections:
-            if connection == websocket:
-                continue
-            await connection.send_text(message)
-
-connectionmanager = ConnectionManager()
-
-@app.get("/{full_path:path}")
-async def serve_frontend(full_path: str):
-    return FileResponse('frontend/public/index.html')
-
-@app.websocket("/ws/{client_id}")
-async def websocket_endpoint(websocket: WebSocket, client_id: int):
-    await connectionmanager.connect(websocket)
+@app.websocket("/ws")
+async def chat_endpoint(websocket: WebSocket):
+    await websocket.accept()
+    clients.append(websocket)
     try:
         while True:
             data = await websocket.receive_text()
-            await connectionmanager.send_personal_message(f"You: {data}", websocket)
-            await connectionmanager.broadcast(f"Client #{client_id}: {data}", websocket)
+            # Broadcast received message to all connected clients except sender
+            for client in clients:
+                if client != websocket:
+                    await client.send_text(data)
     except WebSocketDisconnect:
-        connectionmanager.disconnect(websocket)
-        await connectionmanager.broadcast(f"Client #{client_id} left the chat", websocket)
+        clients.remove(websocket)
 
 # Enable CORS for localhost:3000 (your frontend URL)
 app.add_middleware(
@@ -86,7 +64,8 @@ app.add_middleware(
 app.include_router(user_routes.router, prefix="/users", tags=["Users"])
 app.include_router(service_routes.router, prefix="/services", tags=["Services"])
 app.include_router(appointments_routes.router, prefix="/api", tags=["Appointments"])
+app.include_router(map_routes.router, prefix="/api", tags=["Map"])
 
 @app.get("/")
 async def root():
-    return {"message": "Welcome to ZETAONE!"}
+    return {"message": "Welcome to One Stop Solutions!"}

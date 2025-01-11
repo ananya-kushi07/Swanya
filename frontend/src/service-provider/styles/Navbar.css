@@ -1,0 +1,83 @@
+.logo {
+  text-decoration: none;
+  color: #000000;
+  font-size: 1.25rem;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.MuiAppBar-root {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(20px);
+  box-shadow: none !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.MuiToolbar-root {
+  min-height: 44px !important;
+  padding: 0 !important;
+}
+
+.MuiContainer-root {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 max(22px, env(safe-area-inset-left));
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 2rem;
+}
+
+.nav-links li {
+  margin: 0;
+}
+
+.nav-links a {
+  color: rgba(0, 0, 0, 0.8);
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  transition: all 0.2s ease-in-out;
+}
+
+.nav-links a:hover {
+  color: #0066cc;
+  background-color: transparent;
+}
+
+@media (max-width: 768px) {
+  .nav-links ul {
+    gap: 1rem;
+  }
+  
+  .nav-links.active ul {
+    flex-direction: column;
+    position: absolute;
+    top: 44px;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    padding: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .MuiContainer-root {
+    padding: 0 1rem;
+  }
+  
+  .nav-links li {
+    margin: 0.5rem 0;
+  }
+}

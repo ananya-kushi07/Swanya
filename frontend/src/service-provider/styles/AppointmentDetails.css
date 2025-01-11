@@ -1,0 +1,53 @@
+/* AppointmentDetails.css */
+
+/* Container for the appointment details */
+.appointment-details-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .appointment-details-container h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .appointment-details-container p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  
+  /* Styling for the cancelled status */
+  .appointment-details-container p.status-cancelled {
+    color: red;
+    font-weight: bold;
+  }
+  
+  /* Add a disabled state for cancelled appointments */
+  .appointment-details-container.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+  }
+  
+  /* Button or link styles for navigating back */
+  .appointment-details-container .back-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .appointment-details-container .back-button:hover {
+    background-color: #0056b3;
+  }
+  

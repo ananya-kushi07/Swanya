@@ -274,7 +274,7 @@ const ServiceDetails = () => {
           {/* Add any actions here if needed */}
         </CardActions>
       </Card>
-
+  
       <Card className={classes.card}>
         <CardContent className={classes.cardContent}>
           <Typography variant="h6">Service Provider Details</Typography>
@@ -289,6 +289,26 @@ const ServiceDetails = () => {
           </Typography>
         </CardContent>
       </Card>
+  
+      {/* Chat with Provider Button */}
+      <Button
+        variant="contained"
+        color="primary"
+        sx={{
+          position: 'center',
+          bottom: 10,
+          right: 10,
+          borderRadius: 5,
+          fontSize: '0.9rem',
+          marginBottom: '10px',
+          '&:hover': { backgroundColor: '#2980b9' },
+        }}
+        onClick={() => navigate('/chatting', { state: { providerId: serviceProvider._id, providerName: serviceProvider.full_name } })}
+      >
+        Chat with Provider
+      </Button>
+  
+      {/* Book Now Button */}
       <Button
         variant="contained"
         color="success"
@@ -306,6 +326,7 @@ const ServiceDetails = () => {
       </Button>
     </div>
   );
+  
 };
 
 export default ServiceDetails;

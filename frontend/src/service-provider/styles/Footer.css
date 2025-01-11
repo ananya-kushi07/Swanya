@@ -1,0 +1,148 @@
+footer {
+    background: linear-gradient(to right, #2c3e50, #3498db);
+    color: #fff;
+    padding: 4rem 0 3rem;
+    margin-top: 3rem;
+  }
+  
+  .footer-container {
+    display: flex;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 0 1rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .footer-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    flex: 1;
+  min-width: 200px;
+  }
+  
+  .footer-section h3 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    position: relative;
+    padding-bottom: 0.5rem;
+  }
+  
+  .footer-section h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 2px;
+    background-color: #3498db;
+  }
+  
+  .footer-section p {
+    margin: 0.5rem 0;
+    color: #ecf0f1;
+    line-height: 1.6;
+  }
+  
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-section ul li {
+    margin-bottom:  5px;
+  }
+  
+  .footer-section a {
+    color: #ecf0f1;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    position: relative;
+  }
+  
+  .footer-section a:hover {
+    color: #3498db;
+  }
+  
+  .footer-section a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background-color: #3498db;
+    transition: width 0.3s ease;
+  }
+  
+  .footer-section a:hover::after {
+    width: 100%;
+  }
+  
+  /* Newsletter Section Styles */
+  .footer-section .MuiTextField-root {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    margin-bottom:  10px;
+    width: 100%;
+  }
+  
+  .footer-section .MuiTextField-root .MuiOutlinedInput-root {
+    color: #fff;
+  }
+  
+  .footer-section .MuiTextField-root .MuiOutlinedInput-notchedOutline {
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+  
+  .footer-section .MuiTextField-root:hover .MuiOutlinedInput-notchedOutline {
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .footer-section .MuiTextField-root .MuiInputLabel-root {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .footer-section .MuiButton-contained {
+    background-color: #3498db;
+    color: #fff;
+    padding: 0.8rem 2rem;
+    transition: all 0.3s ease;
+    text-transform: none;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+  
+  .footer-section .MuiButton-contained:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .footer-section .MuiButton-root {
+    display: block;
+    margin-top: 10px;
+  }
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    footer {
+      padding: 3rem 0 2rem;
+    }
+    
+    .footer-container {
+      gap: 2rem;
+    }
+    
+    .footer-section {
+      text-align: center;
+    }
+    
+    .footer-section h3::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }

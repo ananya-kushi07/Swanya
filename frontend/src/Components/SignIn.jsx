@@ -115,7 +115,8 @@ const SignIn = () => {
       } else if (role === 'customer') {
         navigate('/home');
       } else if (role === 'service_provider') {
-        navigate('/service-provider-dashboard');
+        // navigate('/service-provider-dashboard');
+        window.location.href = '/service-provider';
       } else {
         navigate('/'); // Default fallback
       }

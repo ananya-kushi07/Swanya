@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Profile.css'; // Optional: Move CSS here if needed
+import '../styles/Profile.css'; // Optional: Move CSS here if needed
+
 
 const Profile = () => {
   const [profileData, setProfileData] = useState({
@@ -17,8 +17,6 @@ const Profile = () => {
     location: '',
     preferences: {}
   });
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch user details from local storage
@@ -46,14 +44,10 @@ const Profile = () => {
   };
 
   const handleUpdate = () => {
+    // Here, connect to your backend to update profile data
     console.log("Updated Data:", editData);
     setProfileData({ ...profileData, ...editData });
     alert("Profile updated successfully!");
-  };
-
-  const handleLogout = () => {
-    localStorage.clear(); // Clear local storage
-    navigate('/signin');  // Navigate to signin page
   };
 
   return (
@@ -65,6 +59,8 @@ const Profile = () => {
         <p><strong>Full Name:</strong> {profileData.full_name}</p>
         <p><strong>Role:</strong> {profileData.role}</p>
         <p><strong>Location:</strong> {profileData.location}</p>
+        <p><strong>Preferences:</strong> {JSON.stringify(profileData.preferences)}</p>
+        <p><strong>User ID:</strong> {profileData.user_id}</p>
       </div>
 
       <div style={styles.updateSection}>
@@ -87,11 +83,22 @@ const Profile = () => {
           style={styles.input}
         />
 
+        <label style={styles.label}>Preferences:</label>
+        <textarea
+          name="preferences"
+          value={JSON.stringify(editData.preferences)}
+          onChange={(e) => {
+            try {
+              setEditData({ ...editData, preferences: JSON.parse(e.target.value) });
+            } catch (error) {
+              alert("Invalid JSON format for preferences");
+            }
+          }}
+          style={styles.textarea}
+        />
+
         <button onClick={handleUpdate} style={styles.button}>Update Profile</button>
       </div>
-
-      {/* Logout Button */}
-      <button onClick={handleLogout} style={styles.logoutButton}>Logout</button>
     </div>
   );
 };
@@ -139,23 +146,19 @@ const styles = {
     borderRadius: '4px',
     border: '1px solid #ccc',
   },
+  textarea: {
+    width: '100%',
+    padding: '8px',
+    height: '80px',
+    marginBottom: '10px',
+    borderRadius: '4px',
+    border: '1px solid #ccc',
+  },
   button: {
     display: 'block',
     width: '100%',
     padding: '10px',
     backgroundColor: '#2c3e50',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    fontWeight: 'bold',
-    marginBottom: '10px'
-  },
-  logoutButton: {
-    display: 'block',
-    width: '100%',
-    padding: '10px',
-    backgroundColor: '#e74c3c',
     color: '#fff',
     border: 'none',
     borderRadius: '4px',

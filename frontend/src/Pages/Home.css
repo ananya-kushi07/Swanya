@@ -1,124 +1,226 @@
-/* General Styling */
+/* Base Styles */
 .home-container {
-    background-image: url('../assets/images/home-image.jpg');
+    min-height: 100vh;
+    background-color: #f5f5f5;
+  }
+  
+  /* Animated Banner */
+  .banner {
+    background-color: #ff7f50;
+    padding: 12px 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .banner-sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .banner-text {
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    animation: scrollBanner 20s linear infinite;
+    white-space: nowrap;
+  }
+  
+  @keyframes scrollBanner {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
+  
+  /* Hero Section */
+  .hero-section {
+    position: relative;
+    height: 60vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url('/api/placeholder/1920/1080');
     background-size: cover;
     background-position: center;
-    padding: 50px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    font-family: 'Arial', sans-serif;
+    color: white;
+  }
+  
+  .hero-content {
+    max-width: 800px;
+    padding: 0 20px;
+  }
+  
+  .hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  .hero-content p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+  
+  /* Stats Section */
+  .stats-section {
+    padding: 60px 20px;
+    background-color: white;
+  }
+  
+  .stats-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+  }
+  
+  .stat-card {
+    background-color: #f8f8f8;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .stat-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .stat-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ff7f50;
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  /* Services Section */
+  .services-section {
+    padding: 60px 20px;
+  }
+  
+  .services-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+  }
+  
+  .services-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+  }
+  
+  .service-card {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .service-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .main-card {
+    background-color: #f5f5dc;
+    grid-column: span 2;
+  }
+  
+  .secondary-card {
+    padding: 30px;
+  }
+  
+  .secondary-card.orange {
+    background-color: #ff7f50;
+    color: white;
+  }
+  
+  .secondary-card.green {
+    background-color: #C23373;
+    color: white;
+  }
+  
+  .card-content {
+    padding: 30px;
+  }
+  .card-content:hover {
+    background-color: #f8f8f8;
+  }
+  .card-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+  
+  .service-image {
     width: 100%;
-    min-height: 100vh;
-}
-
-/* Hero Section */
-.hero h1 {
-    font-size: 3em;
-    font-weight: bold;
-    color: white;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-    margin-bottom: 20px;
-}
-
-.hero p {
-    font-size: 1.2em;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    border-radius: 10px;
-    text-align: justify;
-}
-
-/* Stats Section */
-.stat-cards {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    margin-top: 50px;
-    gap: 20px;
-}
-
-.stat-card {
-    flex: 1;
-    min-width: 250px;
-    padding: 20px;
-    background-color: #A7D477;
-    color: #4A6670;
-    border-radius: 10px;
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.stat-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.stat-value {
-    font-size: 2em;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-/* Info Section */
-.info-section {
-    margin-top: 50px;
-    color: #4A6670;
-}
-
-.info-section h2 {
-    font-size: 2.5em;
-    font-weight: bold;
-    color: white;
-    background-color: #4A6670;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-}
-
-.info-cards {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.info-card {
-    width: 250px;
-    padding: 20px;
-    background-color: #A7D477;
-    color: #4A6670;
-    border-radius: 10px;
-    text-align: justify;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.info-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.info-card h3 {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-/* Footer */
-footer {
-    margin-top: 50px;
-    background-color: #4A6670;
-    padding: 20px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+  
+  /* Contact Section */
+  .contact-section {
+    background-color: #ff7f50;
     color: white;
     text-align: center;
-}
-
-footer .social-icons a {
+    padding: 60px 20px;
+  }
+  
+  .contact-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .cta-button {
+    background-color: white;
+    color: #ff7f50;
+    padding: 15px 40px;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    margin-top: 30px;
+  }
+  
+  .cta-button:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .hero-content h1 {
+      font-size: 2.5rem;
+    }
+  
+    .main-card {
+      grid-column: span 1;
+    }
+  
+    .stats-container {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  footer .social-icons a {
     margin: 0 10px;
     color: white;
     font-size: 1.5em;
     transition: color 0.3s;
-}
-
-footer .social-icons a:hover {
+  }
+  
+  footer .social-icons a:hover {
     color: #A7D477;
-}
+  }
+  
