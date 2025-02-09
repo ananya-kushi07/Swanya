@@ -79,4 +79,4 @@ In today’s fast-paced world, finding reliable and efficient service providers 
 
 ## **Conclusion**
 **Swanya** addresses the pressing need for a unified platform that connects customers with reliable service providers. By integrating advanced features, user-friendly design, and robust support, **Swanya** is poised to become the go-to solution for all maintenance and service needs. Join us in transforming the way services are delivered and experienced!
-
+https://github.com/Swasthik-Prabhu/Swanya/blob/main/frontend/src/assets/images/Zetethon%20Award%20receveing.jpg
