@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create an Axios instance for the base API setup
 const API = axios.create({
-  baseURL: 'http://127.0.0.1:8000', // FastAPI backend URL
+  baseURL: 'https://swanya.onrender.com/', // FastAPI backend URL
   headers: {
     'Content-Type': 'application/json',
   },
