@@ -9,4 +9,5 @@ email-validator
 pymongo
 passlib[bcrypt]
 python-jose[cryptography]
+jinja2
 
