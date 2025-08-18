@@ -1,6 +1,5 @@
 from fastapi import APIRouter, HTTPException, Depends
 from models.user_models import UserRegistration, UserLogin, UserProfile, UserInDB, userprof
-from sqlalchemy.orm import Session
 from core.auth import hash_password
 
 from database import get_database, db
